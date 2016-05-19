@@ -18,6 +18,13 @@ I'm planning on implementing the following types of data structures:
     * AVL BST
     * 2-3-4 Tree
     * Red-Black BST
-  * Heap
-  * Linked List
-  * Queue
+  * Heaps:
+    * Min heap
+    * Max heap
+  * Linked Lists:
+    * Singly-linked
+    * Doubly-linked
+  * Queues:
+    * Single-ended
+    * Double-ended
+  * Stack
