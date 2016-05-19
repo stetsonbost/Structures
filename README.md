@@ -11,7 +11,7 @@ I'm planning on implementing the following types of data structures:
     * Quadratic Probing
     * Double Hashing
   * Trees:
-    * Basic BST
+    * Basic (Unbalanced) BST
     * Random BST
     * Randomized BST
     * Splay BST
