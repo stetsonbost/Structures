@@ -102,13 +102,13 @@ class BasicBST {
   void destroyNode(Node& node);
   void insertNode(const Item& value, Node& node);
   void eraseNode(const Item& value, Node*& node);
-  void eraseChildNode(Node*& parent, const Node*& child,
+  void resetParentChild(Node*& parent, const Node*& child,
       const Node*& newChild) const;
   iterator findNode(const Item& value, const Node& node) const;
   iterator beginNode(const Node& node) const;
   void outputAllValuesNode(const Node* node) const;
-  Node* leftmostNode(const Node*& node);
-  Node* rightmostNode(const Node*& node);
+  iterator leftmostNode(const Node*& node) const;
+  iterator rightmostNode(const Node*& node) const;
 
   /// size of the tree
   size_t size_;
