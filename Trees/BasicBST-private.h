@@ -10,16 +10,24 @@
 // #include <string>
 
 template <class Item>
-BasicBST<Item>::BasicBST() : size_(0), root_(nullptr) {}
-
-template <class Item>
-BasicBST<Item>::BasicBST(const BasicBST& tree) {
-  //TODO
+BasicBST<Item>::BasicBST() : size_(0), root_(nullptr) {
 }
 
 template <class Item>
-BasicBST<Item> BasicBST<Item>::operator=(const BasicBST& tree) {
-  //TODO
+BasicBST<Item>::BasicBST(const BasicBST& tree) {
+  assert(root_ == nullptr);
+  BasicBSTNode(root_, tree.root_);
+  assert(size_ == tree.size_);
+}
+
+template <class Item>
+void BasicBST<Item>::BasicBSTNode(Node*& newTree, const Node*& oldTree) {
+  if (oldTree != nullptr) {
+    newTree = new Node{oldTree->value};
+    ++size_;
+    BasicBSTNode(newTree->left_, oldTree->left_);
+    BasicBSTNode(newTree->right_, oldTree->right_);
+  }
 }
 
 template <class Item>
@@ -32,9 +40,17 @@ void BasicBST<Item>::destroyNode(Node& node) {
   if (node != nullptr) {
     destroyNode(node->left_);
     destroyNode(node->right_);
+    delete node;
+    node = nullptr;
   }
-  delete node;
-  node = nullptr;
+}
+
+template <class Item>
+BasicBST<Item> BasicBST<Item>::operator=(const BasicBST& tree) {
+  // Destroy old tree then create new one
+  destroyNode(root_);
+  BasicBSTNode(root_, tree.root_);
+  assert(size_ == tree.size_);
 }
 
 template <class Item>
@@ -71,22 +87,30 @@ void BasicBST<Item>::erase(const Item& value) {
 
 template <class Item>
 void BasicBST<Item>::eraseNode(const Item& value, Node*& node) {
+  /*
+   * WE CAN ASSUME THAT ROOT IS NOT NULLPTR BY PRECONDITION
+   */
   if (value == node->value_) {
     // TODO: the complicated deleting... many cases...
     if (value == node->value_) {
+      // if node is leaf
       if (node->left_ == nullptr && node->right_ == nullptr) {
-        //TODO: Check this??????????????
         // set node's parent's left/right child to nullptr
         if (node != root_) {
-          eraseChildNode(root_, node);
+          eraseChildNode(root_, node, nullptr);
         }
         delete node;
         node = nullptr;
       } else {
         if (node->left_ != nullptr) {
           // TODO: replace node with node that is largest value in the left subtree
+          // this will have no right child because it is largest
+          Node* maxLeft = rightmostNode(node->left_);
+
         } else {
           // TODO: replace node with node that is smallest value in the right subtree
+          // this will have no left child because it is smallest
+          Node* minRight = leftmostNode(node->right_);
         }
       }
     }
@@ -101,14 +125,28 @@ void BasicBST<Item>::eraseNode(const Item& value, Node*& node) {
 }
 
 template <class Item>
-void BasicBST<Item>::eraseChildNode(Node*& parent, const Node*& child) const {
-  if (parent->left_ == child) {
-    parent->left_ == nullptr;
+void BasicBST<Item>::eraseChildNode(Node*& parent, const Node*& child, const Node*& newChild)
+    const {
+  // if child must be to left of parent
+  if (child->value_ < parent->value_) {
+    // if child *is* left node of parent
+    if (parent->left_ == child) {
+      parent->left_ == newChild;
+    } // keep looking for child to left
+    else {
+      eraseChildNode(parent->left_, child);
+    }
   }
-  if (parent->right_ == child) {
-    parent->right_ == nullptr;
+  // if child must be to right of parent
+  if (child->value_ > parent->value_) {
+    // if child *is* right node of parent
+    if (parent->right_ == child) {
+     parent->right_ == newChild;
+    } // keep looking for child to right
+    else {
+      eraseChildNode(parent->left_, child);
+    }
   }
-
 }
 
 template <class Item>

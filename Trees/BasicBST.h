@@ -98,20 +98,17 @@ class BasicBST {
     friend class BasicBST<Item>::Iterator;
   };
 
-  /*
-   * \brief Destructor helper function
-   */
+  void BasicBSTNode(Node*& newTree, const Node*& oldTree);
   void destroyNode(Node& node);
-
-  /*
-   * \brief insert helper function
-   */
   void insertNode(const Item& value, Node& node);
   void eraseNode(const Item& value, Node*& node);
-  void eraseChildNode(Node*& parent, const Node*& child) const;
+  void eraseChildNode(Node*& parent, const Node*& child,
+      const Node*& newChild) const;
   iterator findNode(const Item& value, const Node& node) const;
   iterator beginNode(const Node& node) const;
   void outputAllValuesNode(const Node* node) const;
+  Node* leftmostNode(const Node*& node);
+  Node* rightmostNode(const Node*& node);
 
   /// size of the tree
   size_t size_;
