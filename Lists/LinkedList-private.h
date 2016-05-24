@@ -7,6 +7,7 @@
 
 #include <cassert>
 #include <cstddef>
+#include <iostream> 
 
 
 // ----------------------
@@ -18,12 +19,15 @@ LinkedList<Item>::LinkedList() : size_(0), first_(nullptr), last_(nullptr) {}
 
 template <class Item>
 LinkedList<Item>::LinkedList(const LinkedList<Item>& list) {
-  // TODO
+  // append list to default constructed empty list
+  append(list);
 }
 
 template <class Item>
 LinkedList<Item>::~LinkedList(const LinkedList<Item>& list) {
-  // TODO
+  while (first_!= nullptr) {
+    erase(begin());
+  }
 }
 
 template <class Item>
@@ -160,12 +164,101 @@ bool LinkedList<Item>::operator!=(const Item& rhs) const {
 }
 
 template <class Item>
-void LinkedList<Item>::outputAllValues() const {
-  // TODO
+typename LinkedList<Item>::iterator LinkedList<Item>::find(const Item& value) const {
+  for (iterator iter = begin(); iter != end(); ++iter) {
+    if (*iter->value_ == value) {
+      return iter;
+    }
+  }
+  return iterator(nullptr);
 }
 
+template <class Item>
+void LinkedList<Item>::outputAllValues() const {
+  for (iterator iter = begin(); iter != end(); ++iter) {
+    std::cout << *iter->value_;
+  }
+  std::cout << std::endl;
+}
+
+template <class Item>
+typename LinkedList<Item>::iterator LinkedList<Item>::begin() const {
+  return iterator(first_);
+}
+
+template <class Item>
+typename LinkedList<Item>::iterator LinkedList<Item>::end() const {
+  return iterator(nullptr);
+}
+
+template <class Item>
+typename LinkedList<Item>::const_iterator LinkedList<Item>::cbegin() const {
+  return const_iterator(first_);
+}
+
+template <class Item>
+typename LinkedList<Item>::const_iterator LinkedList<Item>::cend() const {
+  return const_iterator(nullptr);
+}
+
+
+template <class Item>
+typename LinkedList<Item>::reverse_iterator LinkedList<Item>::rbegin() const {
+  return reverse_iterator(first_);
+}
+
+template <class Item>
+typename LinkedList<Item>::reverse_iterator LinkedList<Item>::rend() const {
+  return reverse_iterator(nullptr);
+}
+
+template <class Item>
+typename LinkedList<Item>::const_reverse_iterator LinkedList<Item>::crbegin()
+    const {
+  return const_reverse_iterator(first_);
+}
+
+template <class Item>
+typename LinkedList<Item>::const_reverse_iterator LinkedList<Item>::crend()
+    const {
+  return const_reverse_iterator(nullptr);
+}
 
 
 // -------------------------------
 //   LinkedList Iterator Class 
 // -------------------------------
+
+template <class Item, bool iteratorIsConst>
+LinkedList<Item>::Iterator<iteratorIsConst>::Iterator() : current_(nullptr) {}
+
+template <class Item, bool iteratorIsConst>
+LinkedList<Item>::Iterator<iteratorIsConst>& 
+    LinkedList<Item>::Iterator<iteratorIsConst>::operator++() {
+  current_ = current_->next_;
+  return current_;
+}
+
+template <class Item, bool iteratorIsConst>
+LinkedList<Item>::Iterator<iteratorIsConst>& 
+    LinkedList<Item>::Iterator<iteratorIsConst>::operator--() {
+  current_ = current_->prev_;
+  return current_;
+}
+
+template <class Item, bool iteratorIsConst>
+Node*& LinkedList<Item>::Iterator<iteratorIsConst>::operator*() {
+  return current_;
+}
+
+template <class Item, bool iteratorIsConst>
+bool LinkedList<Item>::Iterator<iteratorIsConst>::operator==(
+    const Iterator& rhs) const {
+  return current_ == rhs.current_;
+}
+
+template <class Item, bool iteratorIsConst>
+bool LinkedList<Item>::Iterator<iteratorIsConst>::operator!=(
+    const Iterator& rhs) const {
+  return !operator==(rhs);
+}

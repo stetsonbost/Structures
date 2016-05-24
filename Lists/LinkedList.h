@@ -24,7 +24,7 @@ class LinkedList {
   using iterator = LinkedList::Iterator<false>;
   using const_iterator = Iterator<true>;
   using reverse_iterator = ReverseIterator<false>;
-  using reverse_const_iterator = ReverseIterator<true>;
+  using const_reverse_iterator = ReverseIterator<true>;
 
   /*
    * \brief Default constructor
@@ -81,13 +81,14 @@ class LinkedList {
   Item& operator+=(const Item& rhs);
   bool operator==(const LinkedList<Item>& rhs) const;
   bool operator!=(const Item& rhs) const;
-  void outputAllValues() const;
 
   /*
    * \brief Finds the first instance of value in the list
    * \return iterator for the first first instance of the value
+   * \note If value is not in list, returns iterator(nullptr)
    */
   iterator find(const Item& value) const;
+  void outputAllValues() const;
   
   /// Return an iterator to the first element in the Tree
   iterator begin() const;
@@ -148,13 +149,13 @@ class LinkedList {
 
     // Provide all the usual operations for a forward iterator
     Iterator();
-    Iterator(const Iterator&);
-    Iterator& operator=(const Iterator&);
-    ~Iterator();
+    Iterator(const Iterator&) = default;
+    Iterator& operator=(const Iterator&) = default;
+    ~Iterator() = default;
 
     Iterator& operator++();
     Iterator& operator--();
-    Item& operator*() const;
+    Node*& operator*() const;
     bool operator==(const Iterator& rhs) const;
     bool operator!=(const Iterator& rhs) const;
 
@@ -190,9 +191,9 @@ class LinkedList {
 
     // Provide all the usual operations for a forward iterator
     ReverseIterator();
-    ReverseIterator(const ReverseIterator&);
-    ReverseIterator& operator=(const ReverseIterator&);
-    ~ReverseIterator();
+    ReverseIterator(const ReverseIterator&) = default;
+    ReverseIterator& operator=(const ReverseIterator&) = default;
+    ~ReverseIterator() = default;
 
     ReverseIterator& operator++();
     ReverseIterator& operator--();
