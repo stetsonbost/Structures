@@ -58,12 +58,28 @@ class LinkedList {
   Item& pop_front();
   void push_back(const Item& value);
   Item& pop_back();
+
+  /*
+   * \brief Inserts node with value at position before the
+   *     node specified by iterator
+   */
   iterator insert(iterator position, const Item& value);
   iterator erase(iterator position);
   void remove(const Item& value);
-  void merge(LinkedList<Item>& list);
+
+  /*
+   * \brief Appends one list to another
+   * \details Calls push_back on each element of list
+   * \note Not a member function of std::list
+   */
+  void append(const LinkedList<Item>& list);
+  /*
+   * \brief Appends one element to *this
+   * \details Calls push_back
+   * \note Not a member function of std::list
+   */
   Item& operator+=(const Item& rhs);
-  bool operator==(const Item& rhs) const;
+  bool operator==(const LinkedList<Item>& rhs) const;
   bool operator!=(const Item& rhs) const;
   void outputAllValues() const;
 
@@ -144,8 +160,8 @@ class LinkedList {
 
    private:
     friend class LinkedList;
-    Iterator(Item* const start);  ///< Only friends create these iterators
-    Item* current_;               ///< The current value in the vector
+    Iterator(Node* const start);  ///< Only friends create these iterators
+    Node* current_;               ///< The current value in the vector
   };
 
   /***
