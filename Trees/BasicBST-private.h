@@ -7,7 +7,6 @@
 
 #include <cassert>
 #include <cstddef>
-// #include <string>
 
 template <class Item>
 BasicBST<Item>::BasicBST() : size_(0), root_(nullptr) {
@@ -276,16 +275,17 @@ void BasicBST<Item>::outputAllValues() const {
   if (root_ != nullptr) {
   outputAllValuesNode(root_);
   }
+  std::cout << std::endl;
 }
 
 template <class Item>
 void BasicBST<Item>::outputAllValuesNode(const Node* node) const {
   if (node->left_ != nullptr) {
-  outputAllValuesNode(node->left_);
+    outputAllValuesNode(node->left_);
   }
   std::cout << node->value_;
   if (node->right_ != nullptr) {
-  outputAllValuesNode(node->right_);
+    outputAllValuesNode(node->right_);
   }
 }
 
