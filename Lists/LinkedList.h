@@ -13,7 +13,8 @@
 
 template <class Item>
 class LinkedList {
- private:
+ // private:
+  // forward declaration of private iterator classes
   template <bool iteratorIsConst>
   class Iterator;
 
@@ -21,32 +22,32 @@ class LinkedList {
   class ReverseIterator;
 
  public:
-  using iterator = LinkedList::Iterator<false>;
-  using const_iterator = Iterator<true>;
-  using reverse_iterator = ReverseIterator<false>;
-  using const_reverse_iterator = ReverseIterator<true>;
+  using iterator = LinkedList<Item>::Iterator<false>;
+  using const_iterator = LinkedList<Item>::Iterator<true>;
+  using reverse_iterator = LinkedList<Item>::ReverseIterator<false>;
+  using const_reverse_iterator = LinkedList<Item>::ReverseIterator<true>;
 
-  /*
+  /**
    * \brief Default constructor
    */
   LinkedList();
 
-  /*
+  /**
    * \brief Copy constructor
    */
   LinkedList(const LinkedList& list);
 
-  /*
+  /**
    * \brief Assignment operator
    */
   LinkedList<Item> operator=(const LinkedList& list);
 
-  /*
+  /**
    * \brief Default destructor
    */
   ~LinkedList();
 
-  /*
+  /**
    * \brief returns size of the list
    */
   size_t size() const;
@@ -59,7 +60,7 @@ class LinkedList {
   void push_back(const Item& value);
   Item& pop_back();
 
-  /*
+  /**
    * \brief Inserts node with value at position before the
    *     node specified by iterator
    */
@@ -67,13 +68,14 @@ class LinkedList {
   iterator erase(iterator position);
   void remove(const Item& value);
 
-  /*
+  /**
    * \brief Appends one list to another
    * \details Calls push_back on each element of list
    * \note Not a member function of std::list
    */
   void append(const LinkedList<Item>& list);
-  /*
+
+  /**
    * \brief Appends one element to *this
    * \details Calls push_back
    * \note Not a member function of std::list
@@ -82,7 +84,7 @@ class LinkedList {
   bool operator==(const LinkedList<Item>& rhs) const;
   bool operator!=(const Item& rhs) const;
 
-  /*
+  /**
    * \brief Finds the first instance of value in the list
    * \return iterator for the first first instance of the value
    * \note If value is not in list, returns iterator(nullptr)
@@ -110,12 +112,6 @@ class LinkedList {
 
 
  private:
-  /// size of the list
-  size_t size_;
-  /// pointers to the first and last elements of the list
-  Node* first_;
-  Node* last_;
-
   struct Node {
    public:
     Item& value_;
@@ -123,7 +119,13 @@ class LinkedList {
     Node* prev_;
   };
 
-  /***
+  /// size of the list
+  size_t size_;
+  /// pointers to the first and last elements of the list
+  Node* first_;
+  Node* last_;
+ 
+  /**
    * \class Iterator
    * \brief STL-style iterator for LinkedList.
    */
@@ -165,7 +167,7 @@ class LinkedList {
     Node* current_;               ///< The current value in the vector
   };
 
-  /***
+  /**
    * \class ReverseIterator
    * \brief STL-style reverse iterator for LinkedList.
    */
