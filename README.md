@@ -8,10 +8,10 @@ Admittedly, I don't like writing tests, so I'm already behind on testing these s
 I want to be able to add elements, delete elements, and find elements, as well as other functionality that may depend on the type of container.
 As a secondary goal, I want to maintain neat, consistent coding style throughout this project, as was enforced in CS70; this means adhering to the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) (more or less).
 
-So far, I've implemented the following data structures:
+So far, I've worked on the following data structures:
   * Trees:
-    * Basic BST (Unbalanced) - *untested*
-  * Doubly-Linked List - *untested*
+    * Basic BST (Unbalanced) - *implemented, untested*
+  * Doubly-Linked List - *in progress, untested*
 
 I'm planning on implementing the following data structures, although not necessarily in the order listed here:
   * Hash Tables with the following collision resolution strategies:
