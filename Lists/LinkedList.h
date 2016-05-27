@@ -13,7 +13,7 @@
 
 template <class Item>
 class LinkedList {
- // private:
+ private:
   // forward declaration of private iterator classes
   template <bool iteratorIsConst>
   class Iterator;
@@ -157,14 +157,14 @@ class LinkedList {
 
     Iterator& operator++();
     Iterator& operator--();
-    Node*& operator*() const;
+    Item*& operator*() const;
     bool operator==(const Iterator& rhs) const;
     bool operator!=(const Iterator& rhs) const;
 
    private:
-    friend class LinkedList;
-    Iterator(Node* const start);  ///< Only friends create these iterators
-    Node* current_;               ///< The current value in the vector
+    friend class LinkedList;      ///< Only friends create these iterators
+    Iterator(Node* const start);  ///< Parameterized Constructor
+    Node* current_;               ///< The current node in the LinkedList
   };
 
   /**
@@ -199,13 +199,13 @@ class LinkedList {
 
     ReverseIterator& operator++();
     ReverseIterator& operator--();
-    Item& operator*() const;
+    Item*& operator*() const;
     bool operator==(const ReverseIterator& rhs) const;
     bool operator!=(const ReverseIterator& rhs) const;
 
    private:
-    friend class LinkedList;
-    ReverseIterator(Item* const start);  ///< Only friends create these iterators
+    friend class LinkedList;             ///< Only friends create these iterators
+    ReverseIterator(Item* const start);  ///< Parameterized constructor
     Item* current_;                      ///< The current value in the vector
   };
 };

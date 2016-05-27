@@ -25,7 +25,7 @@ LinkedList<Item>::LinkedList(const LinkedList<Item>& list) {
 }
 
 template <class Item>
-LinkedList<Item>::~LinkedList(const LinkedList<Item>& list) {
+LinkedList<Item>::~LinkedList() {
   while (first_!= nullptr) {
     erase(begin());
   }
@@ -33,7 +33,10 @@ LinkedList<Item>::~LinkedList(const LinkedList<Item>& list) {
 
 template <class Item>
 LinkedList<Item> LinkedList<Item>::operator=(const LinkedList<Item>& list) {
-  // TODO
+  ~LinkedList(this);
+  for (iterator iter = list.begin(); iter != list.end(); ++iter) {
+    push_back(*iter);
+  }
 }
 
 template <class Item>
@@ -120,7 +123,7 @@ typename LinkedList<Item>::iterator LinkedList<Item>::erase(iterator position) {
 
 template <class Item>
 void LinkedList<Item>::remove(const Item& value) {
-  iterator iter = begin()
+  iterator iter = begin();
   while (iter != end()) {
     if (*iter->value_ == value) {
       // erase value at current iter's node, returns iter for next node 
