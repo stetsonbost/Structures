@@ -3,15 +3,20 @@
 For this project I will implement some of the data structures I have learned about from CS70 at HMC and Robert Sedgewick's *Algorithms in C++, Parts 1-4*. 
 This project is only meant as an exercise for myself; I make no promise that all structures are correctly or efficiently implemented, but I'll try my best.
 
-I want to be able to add elements, delete elements, find elements, and iterate through each container, as well as other functionality.
-I'm planning on implementing the following types of data structures:
+I want to be able to add elements, delete elements, and find elements, as well as other functionality that may depend on the type of container.
+
+So far, I've implemented the following data structures:
+  * Trees:
+    * Basic BST (Unbalanced) - *untested*
+  * Doubly-Linked List - *untested*
+
+I'm planning on implementing the following data structures:
   * Hash Tables with the following collision resolution strategies:
     * Separate Chaining
     * Linear Probing
     * Quadratic Probing
     * Double Hashing
   * Trees:
-    * Basic (Unbalanced) BST
     * Random BST
     * Randomized BST
     * Splay BST
@@ -21,10 +26,10 @@ I'm planning on implementing the following types of data structures:
   * Heaps:
     * Min heap
     * Max heap
-  * Linked Lists:
-    * Singly-linked
-    * Doubly-linked
   * Queues:
     * Single-ended
     * Double-ended
   * Stack
+  * "Chunky" Container
+  * Hexagonal Grid
+  * Matrices
