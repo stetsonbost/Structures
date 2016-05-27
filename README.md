@@ -1,17 +1,18 @@
 # Lots-O-Structures!
 
-For this project I will implement some of the data structures I have learned about from CS70 at HMC and Robert Sedgewick's *Algorithms in C++, Parts 1-4*.
+For this project, I am implementing some of the data structures I have learned about from CS70 at HMC and Robert Sedgewick's *Algorithms in C++, Parts 1-4*.
 I am starting this project in C++, but I may eventually work with different languages.
-This project is only meant as an exercise for myself; I make no promise that all structures are correctly, elegantly or efficiently implemented, but I'll try my best.
-Admittedly, I don't like writing tests, so I'm already behind on testing these structures.
+This project is only meant as my own personal exercise; I make no guarantee that the structures have been correctly, elegantly or efficiently implemented, but I'll try my best for all those.
+Admittedly, I don't like writing tests, so I'm already behind on testing the containers. C'est la vie...
 
-I want to be able to add elements, delete elements, and find elements, as well as other functionality that may depend on the type of container.
+For each structure, I want to be able to add elements, delete elements, and find elements, as well as other functionality that may depend on the type of container.
 As a secondary goal, I want to maintain neat, consistent coding style throughout this project, as was enforced in CS70; this means adhering to the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) (more or less).
 
 So far, I've worked on the following data structures:
   * Trees:
     * Basic BST (Unbalanced) - *implemented, untested*
-  * Doubly-Linked List - *in progress, untested*
+  * Doubly-Linked List - *implemented, untested*
+  * Heap - *in progress*
 
 I'm planning on implementing the following data structures, although not necessarily in the order listed here:
   * Hash Tables with the following collision resolution strategies:
@@ -26,9 +27,6 @@ I'm planning on implementing the following data structures, although not necessa
     * AVL BST
     * 2-3-4 Tree
     * Red-Black BST
-  * Heaps:
-    * Min heap
-    * Max heap
   * Queues:
     * Single-ended
     * Double-ended
