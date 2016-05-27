@@ -13,7 +13,7 @@ So far, I've implemented the following data structures:
     * Basic BST (Unbalanced) - *untested*
   * Doubly-Linked List - *untested*
 
-I'm planning on implementing the following data structures:
+I'm planning on implementing the following data structures, although not necessarily in the order listed here:
   * Hash Tables with the following collision resolution strategies:
     * Separate Chaining
     * Linear Probing
