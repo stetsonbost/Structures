@@ -3,7 +3,7 @@
 For this project, I am implementing some of the data structures I have learned about from CS70 at HMC and Robert Sedgewick's *Algorithms in C++, Parts 1-4*.
 I am starting this project in C++, but I may eventually work with different languages.
 This project is only meant as my own personal exercise; I make no guarantee that the structures have been correctly, elegantly or efficiently implemented, but I'll try my best for all those.
-Admittedly, I don't like writing tests, so I'm already behind on testing the containers. C'est la vie...
+Alas, I don't like writing tests, so I'm already behind on testing the containers. C'est la vie...
 
 For each structure, I want to be able to add elements, delete elements, and find elements, as well as other functionality that may depend on the type of container.
 As a secondary goal, I want to maintain neat, consistent coding style throughout this project, as was enforced in CS70; this means adhering to the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) (more or less).
