@@ -29,8 +29,9 @@ I'm planning on implementing the following data structures, although not necessa
     * 2-3-4 Tree
     * Red-Black BST
   * Queues:
-    * Single-Ended
-    * Double-Ended
+    * Normal (FIFO) queue
+    * Steque
+    * Deque
   * Heaps:
     * Min Heap
     * [Median Heap](https://github.com/stetsonbost/Structures/issues/6)
