@@ -12,7 +12,8 @@ So far, I've worked on the following data structures:
   * Trees:
     * Basic BST (Unbalanced) - *implemented, untested*
   * Doubly-Linked List - *implemented, untested*
-  * Heap - *in progress*
+  * Heaps:
+    * Max Heap - *in progress*
 
 I'm planning on implementing the following data structures, although not necessarily in the order listed here:
   * Hash Tables with the following collision resolution strategies:
@@ -28,8 +29,11 @@ I'm planning on implementing the following data structures, although not necessa
     * 2-3-4 Tree
     * Red-Black BST
   * Queues:
-    * Single-ended
-    * Double-ended
+    * Single-Ended
+    * Double-Ended
+  * Heaps:
+    * Min Heap
+    * Median Heap
   * Stack
   * "Chunky" Container
   * Hexagonal Grid
