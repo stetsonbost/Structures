@@ -33,7 +33,7 @@ I'm planning on implementing the following data structures, although not necessa
     * Double-Ended
   * Heaps:
     * Min Heap
-    * Median Heap
+    * [Median Heap](https://github.com/stetsonbost/Structures/issues/6)
   * Stack
   * "Chunky" Container
   * Hexagonal Grid
