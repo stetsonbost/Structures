@@ -5,6 +5,7 @@ I am starting this project in C++, but I may eventually work with different lang
 This project is only meant as my own personal exercise; I make no guarantee that the structures have been correctly, elegantly or efficiently implemented, but I'll try my best for all those.
 Alas, I don't like writing tests, so I'm already behind on testing the containers. C'est la vie...
 
+Every container will be templated on the type of elements it stores.
 For each structure, I want to be able to add elements, delete elements, and find elements, as well as other functionality that may depend on the type of container.
 As a secondary goal, I want to maintain neat, consistent coding style throughout this project, as was enforced in CS70; this means adhering to the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) (more or less).
 
@@ -39,3 +40,5 @@ I'm planning on implementing the following data structures, although not necessa
   * "Chunky" Container
   * Hexagonal Grid
   * Matrices
+
+These lists will change over time as I implement and learn about more data structures.
