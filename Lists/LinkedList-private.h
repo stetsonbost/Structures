@@ -15,9 +15,6 @@
 //   LinkedList Iterator Class 
 // -------------------------------
 
-// template <class Item>
-// LinkedList<Item>::Iterator::Iterator() : current_(nullptr) {}
-
 template <class Item>
 template <bool iteratorIsConst>
 LinkedList<Item>::Iterator<iteratorIsConst>::Iterator() : current_(nullptr) {}

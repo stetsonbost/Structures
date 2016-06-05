@@ -8,6 +8,7 @@
 
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
+
 #include <cstddef>
 #include <iostream>
 
@@ -133,7 +134,7 @@ class LinkedList {
   class Iterator {
    public:
     // Definitions that are required for this class to be a well-behaved
-    // STL-style iterator that moves forward through a collection of ints.
+    // STL-style iterator that moves forward through a collection.
     using value_type = Item;
     using reference =
         typename std::conditional<iteratorIsConst, const value_type&,
