@@ -8,12 +8,23 @@
 
 #ifndef HEAP_H
 #define HEAP_H
+
 #include <cstddef>
 #include <iostream>
+#include <vector>
 
 template <class Item>
+// template <bool isMaxHeap>
 class Heap {
+ private:
+  // forward declaration of private iterator classes
+  <bool iteratorIsConst>
+  class Iterator;
+
  public:
+  using iterator = Heap<Item>::Iterator<false>;
+  using const_iterator = Heap<Item>::Iterator<true>;
+
   /**
    * \brief Default constructor
    */
@@ -48,7 +59,7 @@ class Heap {
    * /return Top item on the heap
    * \note Should only be called if top_ is not nullptr
    */
-  Item& top() const;
+  Item& peekTop() const;
 
   /**
    * \brief Inserts node with value at position before the
@@ -61,6 +72,13 @@ class Heap {
    * \note Does nothing if item is not in heap
    */
   void erase(const Item& value);
+
+  /**
+   * \brief Erases and returns value at the top of the heap
+   *     Then rearranges values to be a heap.
+   * \note Does nothing if item is not in heap
+   */
+  Item& eraseTop();
 
   /**
    * \returns True if two heaps hold same values, False otherwise
@@ -83,12 +101,63 @@ class Heap {
    * \brief Prints all values in heap to terminal
    */
   void outputAllValues() const;
+
+  /// Return an iterator to the first element in the Tree
+  iterator begin() const;
+  /// Return an iterator to "one past the last"
+  iterator end() const;
+  /// Return a const iterator to the first element in the Tree
+  const_iterator cbegin() const;
+  /// Return a const iterator to "one past the last"
+  const_iterator cend() const;
   
  private:
-  /// size of the heap
-  size_t size_;
-  /// pointers to the top of the heap
-  Item* top_;
+  void swap(iterator value1, iterator value2);
+
+  /// pointers to vector representing heap
+  std::vector<Item>* data_;
+
+  /**
+   * \class Iterator
+   * \brief STL-style iterator for LinkedList.
+   */
+  <bool iteratorIsConst>
+  class Iterator {
+   public:
+    // Definitions that are required for this class to be a well-behaved
+    // STL-style iterator that moves forward through a collection
+    using value_type = Item;
+    using reference =
+        typename std::conditional<iteratorIsConst, const value_type&,
+                                  value_type&>::type;
+    using pointer =
+        typename std::conditional<iteratorIsConst, const value_type*,
+                                  value_type*>::type;
+    using iterator_type =
+        typename std::conditional<iteratorIsConst,
+                                  Heap<Item>::const_iterator,
+                                  Heap<Item>::iterator>::type;
+    using difference_type = ptrdiff_t;
+    using iterator_category = std::bidirectional_iterator_tag;
+    using const_reference = const value_type&;
+
+    // Provide all the usual operations for a forward iterator
+    Iterator() = default;
+    Iterator(const Iterator&) = default;
+    Iterator& operator=(const Iterator&) = default;
+    ~Iterator() = default;
+
+    Iterator& operator++();
+    Iterator& operator--();
+    Item*& operator*() const;
+    bool operator==(const Iterator& rhs) const;
+    bool operator!=(const Iterator& rhs) const;
+
+   private:
+    friend class Heap;                  ///< Only friends create these iterators
+    Iterator(std::vector<Item>::iterator iter);    ///< Parameterized Constructor
+    std::vector<Item>::iterator current_;          ///< The current index in the Heap
+  };
 };
 
 #endif  // HEAP_H
