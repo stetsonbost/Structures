@@ -15,45 +15,45 @@
 //   Heap Iterator Class 
 // -------------------------------
 
-template <class Item>
+template <class Item, bool isMaxHeap>
 template <bool iteratorIsConst>
-Heap<Item>::Iterator<iteratorIsConst>::Iterator(
+Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>::Iterator(
     size_t index, std::vector<Item>* data) : index_(index), data_(data) {
 }
 
 
-template <class Item>
+template <class Item, bool isMaxHeap>
 template <bool iteratorIsConst>
-Heap<Item>::Iterator<iteratorIsConst>& 
-    Heap<Item>::Iterator<iteratorIsConst>::operator++() {
+Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>& 
+    Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>::operator++() {
   index_ = ++index_;
   return index_;
 }
 
-template <class Item>
+template <class Item, bool isMaxHeap>
 template <bool iteratorIsConst>
-Heap<Item>::Iterator<iteratorIsConst>& 
-    Heap<Item>::Iterator<iteratorIsConst>::operator--() {
+Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>& 
+    Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>::operator--() {
   index_ = --index_;
   return index_;
 }
 
-template <class Item>
+template <class Item, bool isMaxHeap>
 template <bool iteratorIsConst>
-Item*& Heap<Item>::Iterator<iteratorIsConst>::operator*() {
+Item*& Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>::operator*() {
   return *data_[index_];
 }
 
-template <class Item>
+template <class Item, bool isMaxHeap>
 template <bool iteratorIsConst>
-bool Heap<Item>::Iterator<iteratorIsConst>::operator==(
+bool Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>::operator==(
     const Iterator& rhs) const {
   return index_ == rhs.index_;
 }
 
-template <class Item>
+template <class Item, bool isMaxHeap>
 template <bool iteratorIsConst>
-bool Heap<Item>::Iterator<iteratorIsConst>::operator!=(
+bool Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>::operator!=(
     const Iterator& rhs) const {
   return !operator==(rhs);
 }

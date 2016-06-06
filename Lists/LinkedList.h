@@ -83,7 +83,7 @@ class LinkedList {
    */
   Item& operator+=(const Item& rhs);
   bool operator==(const LinkedList<Item>& rhs) const;
-  bool operator!=(const Item& rhs) const;
+  bool operator!=(const LinkedList<Item>& rhs) const;
 
   /**
    * \brief Finds the first instance of value in the list

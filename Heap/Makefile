@@ -4,7 +4,7 @@ OBJECTS = Heap.o
 
 Heap: Heap.cc $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -c Heap.cc -o Heap.o
-#	$(CXX) $(CXXFLAGS) -o testHeap Heap.cc $(OBJECTS)
+	# $(CXX) $(CXXFLAGS) -o testHeap Heap.cc $(OBJECTS)
 
 header: Heap.h Heap-private.h
 	$(CXX) $(CXXFLAGS) Heap.h

@@ -163,7 +163,7 @@ bool LinkedList<Item>::operator==(const LinkedList<Item>& rhs) const {
 }
 
 template <class Item>
-bool LinkedList<Item>::operator!=(const Item& rhs) const {
+bool LinkedList<Item>::operator!=(const LinkedList<Item>& rhs) const {
   return !operator==(rhs);
 }
 

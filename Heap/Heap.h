@@ -13,7 +13,7 @@
 #include <iostream>
 #include <vector>
 
-template <class Item>
+template <class Item, bool isMaxHeap>
 // template <bool isMaxHeap>
 class Heap {
  private:
@@ -22,8 +22,8 @@ class Heap {
   class Iterator;
 
  public:
-  using iterator = Heap<Item>::Iterator<false>;
-  using const_iterator = Heap<Item>::Iterator<true>;
+  using iterator = Heap<Item, isMaxHeap>::Iterator<false>;
+  using const_iterator = Heap<Item, isMaxHeap>::Iterator<true>;
 
   /**
    * \brief Default constructor
@@ -38,7 +38,7 @@ class Heap {
   /**
    * \brief Assignment operator
    */
-  Heap<Item> operator=(const Heap& heap);
+  Heap<Item, isMaxHeap> operator=(const Heap& heap);
 
   /**
    * \brief Default destructor
@@ -83,12 +83,12 @@ class Heap {
   /**
    * \returns True if two heaps hold same values, False otherwise
    */
-  bool operator==(const Heap<Item>& rhs) const;
+  bool operator==(const Heap<Item, isMaxHeap>& rhs) const;
 
   /**
    * \return True if and only if operator== returns False
    */
-  bool operator!=(const Item& rhs) const;
+  bool operator!=(const Heap<Item, isMaxHeap>& rhs) const;
 
   /**
    * \brief Finds the first instance of value in the heap
@@ -138,8 +138,8 @@ class Heap {
                                   value_type*>::type;
     using iterator_type =
         typename std::conditional<iteratorIsConst,
-                                  Heap<Item>::const_iterator,
-                                  Heap<Item>::iterator>::type;
+                                  Heap<Item, isMaxHeap>::const_iterator,
+                                  Heap<Item, isMaxHeap>::iterator>::type;
     using difference_type = ptrdiff_t;
     using iterator_category = std::bidirectional_iterator_tag;
     using const_reference = const value_type&;
