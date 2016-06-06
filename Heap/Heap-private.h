@@ -17,8 +17,8 @@
 
 template <class Item>
 template <bool iteratorIsConst>
-Heap<Item>::Iterator<iteratorIsConst>(std::vector<Item>::iterator iter) 
-    : current_(iter) {
+Heap<Item>::Iterator<iteratorIsConst>::Iterator(
+    size_t index, std::vector<Item>* data) : index_(index), data_(data) {
 }
 
 
@@ -26,29 +26,29 @@ template <class Item>
 template <bool iteratorIsConst>
 Heap<Item>::Iterator<iteratorIsConst>& 
     Heap<Item>::Iterator<iteratorIsConst>::operator++() {
-  current_ = ++current_;
-  return current_;
+  index_ = ++index_;
+  return index_;
 }
 
 template <class Item>
 template <bool iteratorIsConst>
 Heap<Item>::Iterator<iteratorIsConst>& 
     Heap<Item>::Iterator<iteratorIsConst>::operator--() {
-  current_ = --current_;
-  return current_;
+  index_ = --index_;
+  return index_;
 }
 
 template <class Item>
 template <bool iteratorIsConst>
-Item*& Heap<Item>::Iterator<iteratorIsConst>::operator*() const {
-  return *current_;
+Item*& Heap<Item>::Iterator<iteratorIsConst>::operator*() {
+  return *data_[index_];
 }
 
 template <class Item>
 template <bool iteratorIsConst>
 bool Heap<Item>::Iterator<iteratorIsConst>::operator==(
     const Iterator& rhs) const {
-  return current_ == rhs.current_;
+  return index_ == rhs.index_;
 }
 
 template <class Item>

@@ -18,7 +18,7 @@ template <class Item>
 class Heap {
  private:
   // forward declaration of private iterator classes
-  <bool iteratorIsConst>
+  template <bool iteratorIsConst>
   class Iterator;
 
  public:
@@ -68,17 +68,17 @@ class Heap {
   void insert(const Item& value);
 
   /**
-   * \brief Erases specified item
+   * \brief Erases item specified by iterator
    * \note Does nothing if item is not in heap
    */
-  void erase(const Item& value);
+  void erase(iterator& iter);
 
   /**
    * \brief Erases and returns value at the top of the heap
    *     Then rearranges values to be a heap.
    * \note Does nothing if item is not in heap
    */
-  Item& eraseTop();
+  Item& removeTop();
 
   /**
    * \returns True if two heaps hold same values, False otherwise
@@ -112,7 +112,10 @@ class Heap {
   const_iterator cend() const;
   
  private:
-  void swap(iterator value1, iterator value2);
+  void swap(iterator& value1, iterator& value2);
+  iterator parent(iterator& child) const;
+  iterator lchild(iterator& parent) const;
+  iterator rchild(iterator& parent) const;
 
   /// pointers to vector representing heap
   std::vector<Item>* data_;
@@ -121,7 +124,7 @@ class Heap {
    * \class Iterator
    * \brief STL-style iterator for LinkedList.
    */
-  <bool iteratorIsConst>
+  template <bool iteratorIsConst>
   class Iterator {
    public:
     // Definitions that are required for this class to be a well-behaved
@@ -147,17 +150,24 @@ class Heap {
     Iterator& operator=(const Iterator&) = default;
     ~Iterator() = default;
 
+    // void swap(Iterator& value1, Iterator& value2);
+
     Iterator& operator++();
     Iterator& operator--();
-    Item*& operator*() const;
+    Item*& operator*();
     bool operator==(const Iterator& rhs) const;
     bool operator!=(const Iterator& rhs) const;
 
    private:
     friend class Heap;                  ///< Only friends create these iterators
-    Iterator(std::vector<Item>::iterator iter);    ///< Parameterized Constructor
-    std::vector<Item>::iterator current_;          ///< The current index in the Heap
+    // Iterator(typename std::vector<Item>::iterator iter);    ///< Parameterized Constructor
+    // typename std::vector<Item>::iterator current_;          ///< The current index in the Heap
+    Iterator(size_t index, std::vector<Item>* data);    ///< Parameterized Constructor
+    size_t index_;          ///< The current index in the Heap
+    std::vector<Item>* data_;
   };
 };
+
+#include "Heap-private.h"
 
 #endif  // HEAP_H

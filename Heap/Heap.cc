@@ -13,7 +13,7 @@
 #include <vector>
 
 template <class Item>
-Heap<Item>::Heap() : size_(0), data_(new std::vector<Item>) {
+Heap<Item>::Heap() : data_(new std::vector<Item>) {
 }
 
 template <class Item>
@@ -45,25 +45,31 @@ bool Heap<Item>::isEmpty() const {
 template <class Item>
 Item& Heap<Item>::peekTop() const {
   // assumes that first element of data exists
-  return *data_.begin();
+  return *data_->begin();
 }
 
 template <class Item>
 void Heap<Item>::insert(const Item& value) {
-  
+  data_->push_back(value);
+  if (true) {
+    //TODO
+  }
 }
 
 template <class Item>
-void Heap<Item>::erase(const Item& value) {
+void Heap<Item>::erase(iterator& iter) {
 
 }
 
 template <class Item>
 Item& Heap<Item>::removeTop() {
-  Item top = data_[0];
-  // TODO
-
-  return top;
+  // save value of top (to be returned)
+  Item topValue = data_[0];
+  // erase the top (includes readjusting heap structure)
+  iterator top = iterator(0);
+  erase(top);
+  // return value of top
+  return topValue;
 }
 
 template <class Item>
@@ -90,28 +96,50 @@ void Heap<Item>::outputAllValues() const {
 }
 
 template <class Item>
-void swap(iterator value1, iterator value2) {
+void Heap<Item>::swap(iterator& value1, iterator& value2) {
   Item& temp = *value1;
   *value1 = *value2;
   *value2 = temp;
 }
 
 template <class Item>
-iterator begin() const {
-  return iterator(data_.begin());
+typename Heap<Item>::iterator Heap<Item>::parent(iterator& child)
+    const {
+  size_t parent = ((child.index_ + 1) / 2) - 1;
+  return iterator(parent);
 }
 
 template <class Item>
-iterator end() const {
-  return iterator(data_.end());
+typename Heap<Item>::iterator Heap<Item>::lchild(iterator& parent)
+    const {
+  size_t lchild = (parent.index_ * 2) + 1;
+  return iterator(lchild);
 }
 
 template <class Item>
-const_iterator cbegin() const {
-  return const_iterator(data_.cbegin());
+typename Heap<Item>::iterator Heap<Item>::rchild(iterator& parent)
+    const {
+  size_t rchild = (parent.index_ * 2) + 2;
+  return iterator(rchild);
+}
+
+
+template <class Item>
+typename Heap<Item>::iterator Heap<Item>::begin() const {
+  return iterator(0);
 }
 
 template <class Item>
-const_iterator cend() const {
-  return const_iterator(data_.cend());
+typename Heap<Item>::iterator Heap<Item>::end() const {
+  return iterator(size());
+}
+
+template <class Item>
+typename Heap<Item>::const_iterator Heap<Item>::cbegin() const {
+  return const_iterator(0);
+}
+
+template <class Item>
+typename Heap<Item>::const_iterator Heap<Item>::cend() const {
+  return const_iterator(size());
 }
