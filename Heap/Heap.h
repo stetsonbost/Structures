@@ -117,6 +117,11 @@ class Heap {
   iterator lchild(iterator& parent) const;
   iterator rchild(iterator& parent) const;
 
+  void maxInsert(iterator& iter, iterator& parent);
+  void minInsert(iterator& iter, iterator& parent);
+  void maxErase(iterator& iter, iterator& lchild, iterator& rchild);
+  void minErase(iterator& iter, iterator& lchild, iterator& rchild);
+
   /// pointers to vector representing heap
   std::vector<Item>* data_;
 
