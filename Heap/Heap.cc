@@ -235,18 +235,19 @@ Item& Heap<Item, isMaxHeap>::removeTop() {
 }
 
 template <class Item, bool isMaxHeap>
-bool Heap<Item, isMaxHeap>::operator==(const Heap<Item, isMaxHeap>& rhs) const {
-
-}
-
-template <class Item, bool isMaxHeap>
-bool Heap<Item, isMaxHeap>::operator!=(const Heap<Item, isMaxHeap>& rhs) const {
-
-}
-
-template <class Item, bool isMaxHeap>
-Item* Heap<Item, isMaxHeap>::find(const Item& value) const {
-
+typename Heap<Item, isMaxHeap>::iterator
+    Heap<Item, isMaxHeap>::find(const Item& value) const {
+  for (iterator iter = begin(); iter != end(); ++iter) {
+    if (*iter == value) {
+      return iter;
+    }
+    if (isMaxHeap && value > *iter) {
+      return iterator(0, nullptr);
+    }
+    if (!isMaxHeap && value < *iter) {
+      return iterator(0, nullptr);
+    }
+  }
 }
 
 template <class Item, bool isMaxHeap>

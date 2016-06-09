@@ -81,21 +81,11 @@ class Heap {
   Item& removeTop();
 
   /**
-   * \returns True if two heaps hold same values, False otherwise
-   */
-  bool operator==(const Heap<Item, isMaxHeap>& rhs) const;
-
-  /**
-   * \return True if and only if operator== returns False
-   */
-  bool operator!=(const Heap<Item, isMaxHeap>& rhs) const;
-
-  /**
    * \brief Finds the first instance of value in the heap
    * \return Pointer for the first first instance of the value
    * \note If value is not in heap, returns nullptr
    */
-  Item* find(const Item& value) const;
+  iterator find(const Item& value) const;
 
   /**
    * \brief Prints all values in heap to terminal
