@@ -6,6 +6,7 @@
  */
 
 #include "MedianHeap.h"
+#include "Heap.h"
 
 #include <cassert>
 #include <cstddef>

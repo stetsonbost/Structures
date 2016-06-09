@@ -4,7 +4,8 @@
  * \author Stetson Bost
  * \brief Implements the details of the MedianHeap Iterator classes
  */
-
+#include "Heap.h"
+ 
 #include <cassert>
 #include <cstddef>
 #include <iostream> 

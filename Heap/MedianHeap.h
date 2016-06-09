@@ -9,6 +9,8 @@
 #ifndef MEDIAN_HEAP_H
 #define MEDIAN_HEAP_H
 
+#include "Heap.h"
+
 #include <cstddef>
 #include <iostream>
 #include <vector>
