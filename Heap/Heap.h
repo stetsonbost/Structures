@@ -102,14 +102,49 @@ class Heap {
   const_iterator cend() const;
   
  private:
+  /**
+   * \brief Swaps 2 elements in the heap
+   * \note Iterators will point to same memory locations as parameters,
+   *     but values at the memory will (probably) be different
+   */
   void swap(iterator& value1, iterator& value2);
+
+  /**
+   * \brief Gives iterator pointing to parent of child
+   * \note If child is on top of the stack, parent index = 0
+   */
   iterator parent(iterator& child) const;
+
+  /**
+   * \brief Gives iterator pointing to left child of parent
+   * \note If parent has no left child, lchild data = nullptr
+   */
   iterator lchild(iterator& parent) const;
+
+  /**
+   * \brief Gives iterator pointing to right child of parent
+   * \note If parent has no right child, rchild data = nullptr
+   */
   iterator rchild(iterator& parent) const;
 
+  /**
+   * \brief Helper function for insert in max heap
+   */
   void maxInsert(iterator& iter, iterator& parent);
+
+  /**
+   * \brief Helper function for insert in min heap
+   */
   void minInsert(iterator& iter, iterator& parent);
+
+  /**
+   * \brief Helper function for erase in max heap
+   */
   void maxErase(iterator& iter, iterator& lchild, iterator& rchild);
+
+  /**
+   * \brief Helper function for erase in min heap
+   */
   void minErase(iterator& iter, iterator& lchild, iterator& rchild);
 
   /// pointers to vector representing heap
@@ -139,7 +174,7 @@ class Heap {
     using iterator_category = std::bidirectional_iterator_tag;
     using const_reference = const value_type&;
 
-    // Provide all the usual operations for a forward iterator
+    // Provide all the usual operations for an iterator
     Iterator() = default;
     Iterator(const Iterator&) = default;
     Iterator& operator=(const Iterator&) = default;
@@ -154,12 +189,11 @@ class Heap {
     bool operator!=(const Iterator& rhs) const;
 
    private:
-    friend class Heap;                  ///< Only friends create these iterators
-    // Iterator(typename std::vector<Item>::iterator iter);    ///< Parameterized Constructor
-    // typename std::vector<Item>::iterator current_;          ///< The current index in the Heap
-    Iterator(size_t index, std::vector<Item>* data);    ///< Parameterized Constructor
-    size_t index_;          ///< The current index in the Heap
-    std::vector<Item>* data_;
+    friend class Heap;                ///< Only friends create these iterators
+    Iterator(size_t index,
+        std::vector<Item>* data);     ///< Parameterized Constructor
+    size_t index_;                    ///< The current index in the Heap
+    std::vector<Item>* data_;         ///< The vector holding the data
   };
 };
 

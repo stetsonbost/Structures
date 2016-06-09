@@ -156,11 +156,12 @@ void Heap<Item, isMaxHeap>::maxErase(iterator& iter,
     
     // lchild and rchild both exist and 
     if (*rchild > *iter || *lchild > *iter) {
-      // rchild should be on top
       if (*rchild > *lchild) {
+        // rchild should be on top
         swap(rchild, iter);
         iter = rchild;
       } else {
+        // lchild should be on top
         swap(lchild, iter);
         iter = lchild;
       }
@@ -201,11 +202,12 @@ void Heap<Item, isMaxHeap>::minErase(iterator& iter,
     
     // lchild and rchild both exist and 
     if (*rchild < *iter || *lchild < *iter) {
-      // rchild should be on top
       if (*rchild < *lchild) {
+        // rchild should be on top
         swap(rchild, iter);
         iter = rchild;
       } else {
+        // lchild should be on top
         swap(lchild, iter);
         iter = lchild;
       }
