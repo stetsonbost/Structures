@@ -58,7 +58,7 @@ void Heap<Item, isMaxHeap>::insert(const Item& value) {
 
   // if value is not at root, make an iterator pointing to value's parent
   if (valueIter != begin()) {
-    iterator parentIter = parent(valueIter)
+    iterator parentIter = parent(valueIter);
 
     // Now move the value to the correct position in the Heap
 
@@ -111,23 +111,99 @@ void Heap<Item, isMaxHeap>::erase(iterator& iter) {
   // iter still points to same position but probably differnt value
   if (size() > 1 && iter.index_ != size() - 1) {
 
+    // iterators for both children
+    iterator lchild = lchild(iter);
+    iterator rchild = rchild(iter);
+
     if (isMaxHeap) {
       // For Max Heap:
 
-      iterator lchild = lchild(iter);
-      iterator rchild = rchild(iter);
-      // stop if there are no children (rchild.data_ will also be nullptr)
-      if (lchild.data_ == nullptr) {
-        return;
+      // loop until return
+      while (true) {
+
+        // there are no children (rchild.data_ will also be nullptr)
+        if (lchild.data_ == nullptr) {
+          // Heap is valid
+          return;
+        }
+
+        // only has lchild
+        if (rchild.data_ == nullptr) {
+          // swap lchild and iter 
+          if (*lchild > *iter) {
+            swap(lchild, iter);
+          }
+          // Heap is valid
+          return;
+        }
+        
+        // lchild and rchild both exist and 
+        if (*rchild > *iter || *lchild > *iter) {
+          // rchild should be on top
+          if (*rchild > *lchild) {
+            swap(rchild, iter);
+            iter = rchild;
+          } else {
+            swap(lchild, iter);
+            iter = lchild;
+          }
+
+          // get iterators for new children
+          lchild = lchild(iter);
+          rchild = rchild(iter);
+
+          // now loop again
+
+        } else {
+          // Heap is valid
+          return;
+        }
       }
-      // only has lchild 
-      // while *iter is less than either of it's children:
-      // TODO: need to deal with case where 1 or both children do not exist
-      // swap *iter with the lesser child
 
     } else {
       // For Min Heap:
 
+      // loop until return
+      while (true) {
+
+        // there are no children (rchild.data_ will also be nullptr)
+        if (lchild.data_ == nullptr) {
+          // Heap is valid
+          return;
+        }
+
+        // only has lchild
+        if (rchild.data_ == nullptr) {
+          // swap lchild and iter 
+          if (*lchild < *iter) {
+            swap(lchild, iter);
+          }
+          // Heap is valid
+          return;
+        }
+        
+        // lchild and rchild both exist and 
+        if (*rchild < *iter || *lchild < *iter) {
+          // rchild should be on top
+          if (*rchild < *lchild) {
+            swap(rchild, iter);
+            iter = rchild;
+          } else {
+            swap(lchild, iter);
+            iter = lchild;
+          }
+
+          // get iterators for new children
+          lchild = lchild(iter);
+          rchild = rchild(iter);
+
+          // now loop again
+
+        } else {
+          // Heap is valid
+          return;
+        }
+      }
     }
   }
 
@@ -183,7 +259,7 @@ typename Heap<Item, isMaxHeap>::iterator
     return iterator(parent, data_);
   }
   // if child is top
-  retun iterator(0, data_)
+  return iterator(0, data_);
 }
 
 template <class Item, bool isMaxHeap>
