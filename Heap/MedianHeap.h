@@ -134,6 +134,9 @@ class MedianHeap {
     using iterator_category = std::bidirectional_iterator_tag;
     using const_reference = const value_type&;
 
+    using max_reverse_iterator =  Heap<Item, true>::ReverseIterator<false>;
+    using min_iterator =  Heap<Item, false>::Iterator<false>;
+
     // Provide all the usual operations for an iterator
     Iterator() = default;
     Iterator(const Iterator&) = default;
@@ -149,10 +152,12 @@ class MedianHeap {
     bool operator!=(const Iterator& rhs) const;
 
    private:
-    friend class MedianHeap;                ///< Only friends create these iterators
-    Iterator();     ///< Parameterized Constructor
-    Heap<Item, true>::ReverseIterator<false> leftIter_;           ///< The current index in the MedianHeap
-    Heap<Item, false>::Iterator<false> rightIter_;         ///< The vector holding the data
+    friend class MedianHeap;          ///< Only friends create these iterators
+    Iterator(Item* median, max_reverse_iterator* left,
+        min_iterator* right);         ///< Parameterized Constructor
+    Item* median_;
+    max_reverse_iterator* left_;  ///< The current index in the MedianHeap
+    min_iterator* right_;         ///< The vector holding the data
   };
 };
 
