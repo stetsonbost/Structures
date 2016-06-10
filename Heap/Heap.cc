@@ -325,3 +325,25 @@ typename Heap<Item, isMaxHeap>::const_iterator Heap<Item, isMaxHeap>::cend()
     const {
   return const_iterator(size(), data_);
 }
+
+template <class Item, bool isMaxHeap>
+typename Heap<Item, isMaxHeap>::iterator Heap<Item, isMaxHeap>::rbegin() const {
+  return iterator(size()-1, data_);
+}
+
+template <class Item, bool isMaxHeap>
+typename Heap<Item, isMaxHeap>::iterator Heap<Item, isMaxHeap>::rend() const {
+  return iterator(-1, data_);
+}
+
+template <class Item, bool isMaxHeap>
+typename Heap<Item, isMaxHeap>::const_iterator Heap<Item, isMaxHeap>::crbegin()
+    const {
+  return const_iterator(size()-1, data_);
+}
+
+template <class Item, bool isMaxHeap>
+typename Heap<Item, isMaxHeap>::const_iterator Heap<Item, isMaxHeap>::crend()
+    const {
+  return const_iterator(-1, data_);
+}

@@ -57,3 +57,51 @@ bool Heap<Item, isMaxHeap>::Iterator<iteratorIsConst>::operator!=(
     const Iterator& rhs) const {
   return !operator==(rhs);
 }
+
+
+// -------------------------------
+//   Heap ReverseIterator Class 
+// -------------------------------
+
+template <class Item, bool isMaxHeap>
+template <bool iteratorIsConst>
+Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>::ReverseIterator(
+    size_t index, std::vector<Item>* data) : index_(index), data_(data) {
+}
+
+
+template <class Item, bool isMaxHeap>
+template <bool iteratorIsConst>
+Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>& 
+    Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>::operator++() {
+  index_ = --index_;
+  return index_;
+}
+
+template <class Item, bool isMaxHeap>
+template <bool iteratorIsConst>
+Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>& 
+    Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>::operator--() {
+  index_ = ++index_;
+  return index_;
+}
+
+template <class Item, bool isMaxHeap>
+template <bool iteratorIsConst>
+Item*& Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>::operator*() {
+  return *data_[index_];
+}
+
+template <class Item, bool isMaxHeap>
+template <bool iteratorIsConst>
+bool Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>::operator==(
+    const ReverseIterator& rhs) const {
+  return index_ == rhs.index_;
+}
+
+template <class Item, bool isMaxHeap>
+template <bool iteratorIsConst>
+bool Heap<Item, isMaxHeap>::ReverseIterator<iteratorIsConst>::operator!=(
+    const ReverseIterator& rhs) const {
+  return !operator==(rhs);
+}

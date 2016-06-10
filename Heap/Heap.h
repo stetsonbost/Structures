@@ -21,9 +21,14 @@ class Heap {
   template <bool iteratorIsConst>
   class Iterator;
 
+  template <bool iteratorIsConst>
+  class ReverseIterator;
+
  public:
   using iterator = Heap<Item, isMaxHeap>::Iterator<false>;
   using const_iterator = Heap<Item, isMaxHeap>::Iterator<true>;
+  using reverse_iterator = Heap<Item, isMaxHeap>::ReverseIterator<false>;
+  using const_reverse_iterator = Heap<Item, isMaxHeap>::ReverseIterator<true>;
 
   /**
    * \brief Default constructor
@@ -92,14 +97,23 @@ class Heap {
    */
   void outputAllValues() const;
 
-  /// Return an iterator to the first element in the Tree
+  /// Return an iterator to the first element in the Heap
   iterator begin() const;
   /// Return an iterator to "one past the last"
   iterator end() const;
-  /// Return a const iterator to the first element in the Tree
+  /// Return a const iterator to the first element in the Heap
   const_iterator cbegin() const;
   /// Return a const iterator to "one past the last"
   const_iterator cend() const;
+
+  /// Return an reverse iterator to the first element in the Heap
+  iterator rbegin() const;
+  /// Return an reverse iterator to "one past the last" (max unsigned int)
+  iterator rend() const;
+  /// Return a const reverse iterator to the first element in the Heap
+  const_iterator crbegin() const;
+  /// Return a const reverse iterator to "one past the last" (max unsigned int)
+  const_iterator crend() const;
   
  private:
   /**
@@ -152,7 +166,7 @@ class Heap {
 
   /**
    * \class Iterator
-   * \brief STL-style iterator for LinkedList.
+   * \brief STL-style iterator for Heap.
    */
   template <bool iteratorIsConst>
   class Iterator {
@@ -191,6 +205,50 @@ class Heap {
    private:
     friend class Heap;                ///< Only friends create these iterators
     Iterator(size_t index,
+        std::vector<Item>* data);     ///< Parameterized Constructor
+    size_t index_;                    ///< The current index in the Heap
+    std::vector<Item>* data_;         ///< The vector holding the data
+  };
+
+  /**
+   * \class ReverseIterator
+   * \brief STL-style iterator for LinkedList.
+   */
+  template <bool iteratorIsConst>
+  class ReverseIterator {
+   public:
+    // Definitions that are required for this class to be a well-behaved
+    // STL-style iterator that moves forward through a collection
+    using value_type = Item;
+    using reference =
+        typename std::conditional<iteratorIsConst, const value_type&,
+                                  value_type&>::type;
+    using pointer =
+        typename std::conditional<iteratorIsConst, const value_type*,
+                                  value_type*>::type;
+    using iterator_type =
+        typename std::conditional<iteratorIsConst,
+                                  Heap<Item, isMaxHeap>::const_iterator,
+                                  Heap<Item, isMaxHeap>::iterator>::type;
+    using difference_type = ptrdiff_t;
+    using iterator_category = std::bidirectional_iterator_tag;
+    using const_reference = const value_type&;
+
+    // Provide all the usual operations for an iterator
+    ReverseIterator() = default;
+    ReverseIterator(const ReverseIterator&) = default;
+    ReverseIterator& operator=(const ReverseIterator&) = default;
+    ~ReverseIterator() = default;
+
+    ReverseIterator& operator++();
+    ReverseIterator& operator--();
+    Item*& operator*();
+    bool operator==(const ReverseIterator& rhs) const;
+    bool operator!=(const ReverseIterator& rhs) const;
+
+   private:
+    friend class Heap;                ///< Only friends create these iterators
+    ReverseIterator(size_t index,
         std::vector<Item>* data);     ///< Parameterized Constructor
     size_t index_;                    ///< The current index in the Heap
     std::vector<Item>* data_;         ///< The vector holding the data
