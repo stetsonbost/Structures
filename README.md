@@ -27,6 +27,7 @@ I'm planning on implementing the following data structures, although not necessa
     * Linear Probing
     * Quadratic Probing
     * Double Hashing
+    * Cuckoo Hashing
   * Trees:
     * Random BST
     * Randomized BST
@@ -42,5 +43,7 @@ I'm planning on implementing the following data structures, although not necessa
   * "Chunky" Container
   * Hexagonal Grid
   * Matrices
+  * Bloom Filter
+  * Skip list
 
 These lists will change over time as I implement and learn about more data structures.
